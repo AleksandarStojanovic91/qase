@@ -1,0 +1,19 @@
+{
+    "step1" : [{ 
+        "stepAction": "Navigate to login page",
+        "stepData" : "https://app.qase.io/login",
+        "expectedResult" : "Login page is displayed",
+        "startStepIndex": 1
+    }],
+    "step2" : [{ 
+        "stepAction": "Enter username into username input field",
+        "stepData" : "aleksandar.stojanovic@qakursevionline.com",
+        "expectedResult" : "Username appears in username input field"
+    }],
+    "step3" : [{ 
+        "stepAction": "Enter password into password input field",
+        "stepData" : "TestPass123!",
+        "expectedResult" : "Password is entered and hidden from the user in password input field"
+    }]
+    
+}
