@@ -86,7 +86,6 @@ Cypress.Commands.add('openTestCaseForm', (project) => {
 /**
  * @memberOf cy
  * @method createTestCaseBasic
- * @param project Project name
  * @param title Case title
  * @param status Case status
  * @param description Case description
@@ -125,12 +124,6 @@ Cypress.Commands.add('createTestCaseBasic', (
       .click()
       .get(createTestCasePage.dropdownOption)
       .contains(suite)
-      .click();
-
-    cy.get(createTestCasePage.severityDropdown)
-      .click()
-      .get(createTestCasePage.dropdownOption)
-      .contains(severity)
       .click();
 
     cy.get(createTestCasePage.severityDropdown)
