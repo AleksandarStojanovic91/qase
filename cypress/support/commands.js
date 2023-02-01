@@ -96,7 +96,7 @@ Cypress.Commands.add('openTestCaseForm', (project) => {
  * @param layer layer
  * @param isFlaky yes or no
  * @param behavior behavior
- * @param automationStatus automationStatus
+ * @param automationStatus automation Status
  * @description use to create a test case
  */
 Cypress.Commands.add('createTestCaseBasic', (
@@ -194,8 +194,8 @@ Cypress.Commands.add('createTestCaseConditions', (
  * @memberOf cy
  * @method createTestCaseSteps
  * @param stepAction step action
- * @param stepData Case title
- * @param expectedResult Case status
+ * @param stepData Step data
+ * @param expectedResult Expected Result
  * @description use to enter test steps 
  */
 Cypress.Commands.add('createTestCaseSteps', (
