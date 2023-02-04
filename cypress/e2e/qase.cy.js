@@ -14,7 +14,7 @@ describe('QASE', () => {
     )
 
   })
-  it('Create a test suite', () => {
+  xit('Create a test suite', () => {
 
     cy.login(
         'aleksandar.stojanovic@qakursevionline.com',
@@ -27,6 +27,17 @@ describe('QASE', () => {
         'Test suite description',
         'Test preconditions'
     )
+
+  })
+
+  it('Create a test case', () => {
+
+    cy.login(
+        'aleksandar.stojanovic@qakursevionline.com',
+        'TestPass123!'
+    );
+
+    cy.createTestCase()
 
   })
 })

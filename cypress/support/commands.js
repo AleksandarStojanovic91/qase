@@ -1,6 +1,7 @@
 const LoginPage = require('../support/pages/loginPage').LoginPage;
 const ProjectsPage = require('../support/pages/projectsPage').ProjectsPage;
 const RepositoryPage = require('../support/pages/repositoryPage').RepositoryPage;
+const CreateTestCasePage = require('../support/pages/createTestCasePage').CreateTestCasePage;
 
 /**
  * @memberOf cy
@@ -70,5 +71,24 @@ Cypress.Commands.add('createTestSuite', (project, name, parentSuite, description
     cy.get(RepositoryPage.preconditions).type(preconditions)
 
     cy.get(RepositoryPage.createBtn).click()
+})
+
+/**
+ * @memberOf cy
+ * @method createTestCase
+ */
+Cypress.Commands.add('createTestCase', () => {
+
+    cy.get(ProjectsPage.projects.TP).click()
+    cy.get(RepositoryPage.createCaseButton).click()
+    cy.get(CreateTestCasePage.title).type('Test case 1')
+    cy.xpath(CreateTestCasePage.status).click();
+    cy.xpath(CreateTestCasePage.dropdownItem.replace('$','Draft')).click();
+    cy.get(CreateTestCasePage.saveCase).click()
+    cy.xpath(RepositoryPage.testCaseInSuite
+        .replace('$','Test cases without suite')
+        .replace('$$','Test case 1')
+    ).should('be.visible');
+
 })
 
