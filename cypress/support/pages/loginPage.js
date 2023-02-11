@@ -1,8 +1,8 @@
-const LoginPage =  {
+const LoginPage = {
 
-    emailInput:'#inputEmail',
-    passwordInput:'#inputPassword',
-    loginButton:'#btnLogin'
+    emailInput: '#inputEmail',
+    passwordInput: '#inputPassword',
+    loginButton: '#btnLogin'
 
 }
 

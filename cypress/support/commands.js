@@ -1,7 +1,7 @@
 const LoginPage = require('../support/pages/loginPage').LoginPage;
 const ProjectsPage = require('../support/pages/projectsPage').ProjectsPage;
 const RepositoryPage = require('../support/pages/repositoryPage').RepositoryPage;
-const CreateTestCasePage = require('../support/pages/createTestCasePage').CreateTestCasePage;
+const CasePage = require('../support/pages/casePage').CasePage;
 
 /**
  * @memberOf cy
@@ -74,21 +74,96 @@ Cypress.Commands.add('createTestSuite', (project, name, parentSuite, description
 })
 
 /**
- * @memberOf cy
+ * @memberof cy
  * @method createTestCase
+ * @param project project name
+ * @param suite suite name
+ * @param title case name
+ * @param status case status
+ * @param severity case severity
+ * @param priority case priority
+ * @param type case type
+ * @param layer case layer
+ * @param isFlaky case isFlaky
+ * @param behavior case behavior
+ * @param automationStatus case automationStatus
+ * @param preconditions case preconditions
+ * @param postconditions case preconditions
+ * @param postconditions case postconditions
+ * @param testCaseSteps case steps
  */
-Cypress.Commands.add('createTestCase', () => {
+Cypress.Commands.add('createTestCase', (project,
+                                        suite,
+                                        title,
+                                        status,
+                                        description,
+                                        severity,
+                                        priority,
+                                        type,
+                                        layer,
+                                        isFlaky,
+                                        behavior,
+                                        automationStatus,
+                                        preconditions,
+                                        postconditions,
+                                        testCaseSteps) => {
 
-    cy.get(ProjectsPage.projects.TP).click()
-    cy.get(RepositoryPage.createCaseButton).click()
-    cy.get(CreateTestCasePage.title).type('Test case 1')
-    cy.xpath(CreateTestCasePage.status).click();
-    cy.xpath(CreateTestCasePage.dropdownItem.replace('$','Draft')).click();
-    cy.get(CreateTestCasePage.saveCase).click()
+    cy.get(ProjectsPage.projects[project]).click()
+    cy.get(RepositoryPage.createCaseBtn).click()
+
+    //test name
+    cy.get(CasePage.title).type(title)
+    //status
+    cy.xpath(CasePage.status).click()
+    cy.xpath(CasePage.dropdownItem.replace('$', status)).click()
+    //description
+    cy.xpath(CasePage.description).type(description)
+    //suite
+    cy.xpath(CasePage.suite).click()
+    cy.xpath(CasePage.dropdownItem.replace('$', suite)).click()
+    //severity
+    cy.xpath(CasePage.severity).click()
+    cy.xpath(CasePage.dropdownItem.replace('$', severity)).click()
+    //priority
+    cy.xpath(CasePage.priority).click()
+    cy.xpath(CasePage.dropdownItem.replace('$', priority)).click()
+    //type
+    cy.xpath(CasePage.type).click()
+    cy.xpath(CasePage.dropdownItem.replace('$', type)).click()
+    //layer
+    cy.xpath(CasePage.layer).click()
+    cy.xpath(CasePage.dropdownItem.replace('$', layer)).click()
+    //isFlaky
+    cy.xpath(CasePage.isFlaky).click()
+    cy.xpath(CasePage.dropdownItem.replace('$', isFlaky)).click()
+    //behavior
+    cy.xpath(CasePage.behavior).click()
+    cy.xpath(CasePage.dropdownItem.replace('$', behavior)).click()
+    //automation status
+    cy.xpath(CasePage.automationStatus).click()
+    cy.xpath(CasePage.dropdownItem.replace('$', automationStatus)).click()
+    //preconditions
+    cy.get(CasePage.preConditions).type(preconditions)
+    //postconditions
+    cy.get(CasePage.postConditions).type(postconditions)
+
+    //test case steps
+    for (let i = 0; i < testCaseSteps.length; i++) {
+        cy.get(CasePage.testCaseStep.addStepBtn).click()
+        let steps = JSON.parse(testCaseSteps[i]);
+        cy.get(CasePage.testCaseStep.action).type(steps.stepAction)
+        cy.get(CasePage.testCaseStep.data).type(steps.data)
+        cy.get(CasePage.testCaseStep.expectedResult).type(steps.expectedResult)
+    }
+
+    //save test case
+    cy.get(CasePage.saveCase).click()
+
+    // Assert test case created under test suite
+    cy.xpath(RepositoryPage.testSuite.replace('$', suite)).click()
+
     cy.xpath(RepositoryPage.testCaseInSuite
-        .replace('$','Test cases without suite')
-        .replace('$$','Test case 1')
-    ).should('be.visible');
+        .replace('$', title))
+        .should('be.visible')
 
 })
-

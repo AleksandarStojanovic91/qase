@@ -1,26 +1,28 @@
-const ProjectsPage = {
+const ProjectPage = {
 
     createNewProjectBtn: '#createButton',
     projectName: '#project-name',
     projectCode: '#project-code',
-    description: '#description-area',
-    projectAccessType: {
+    descriptionArea: '#description-area',
+    projectAcessType: {
         private: '[value="private"]',
-        public: '[value="public"]'
+        public: '[value="public"]',
+
     },
     memberAccess: {
         all: '[value="all"]',
         group: '[value="group"]',
         none: '[value="none"]'
     },
-    cancelBtn: '.LzLtDS.HRmKBJ.MBIQEc',
-    createBtn: '.MfLTYs > .tscvgR',
     projects: {
         SMOKE: '.defect-title[href="/project/SMOKE"]'
-    }
+    },
+
+    cancelBtn: '.LzLtDS.HRmKBJ.MBIQEc',
+    createBtn: '.MfLTYs > .tscvgR > .UdZcu9'
 
 }
 
 module.exports = {
-    ProjectsPage
+    ProjectPage
 }
