@@ -2,6 +2,7 @@ const LoginPage = require('../support/pages/loginPage').LoginPage;
 const ProjectsPage = require('../support/pages/projectsPage').ProjectsPage;
 const RepositoryPage = require('../support/pages/repositoryPage').RepositoryPage;
 const CasePage = require('../support/pages/casePage').CasePage;
+const TestPlanPage = require('../support/pages/testPlanPage').TestPlanPage
 
 /**
  * @memberOf cy
@@ -164,6 +165,39 @@ Cypress.Commands.add('createTestCase', (project,
 
     cy.xpath(RepositoryPage.testCaseInSuite
         .replace('$', title))
+        .should('be.visible')
+
+})
+
+/**
+ * @memberOf cy
+ * @method createTestPlan
+ * @param project Project name
+ * @param name Suite name
+ * @param title Test plan name
+ * @param description Test plan description
+ * @param testCaseName Test case name
+ * @description use to create a test plan
+ */
+Cypress.Commands.add('createTestPlan', (project, suite, title, description, testCaseName) => {
+    cy.get(ProjectsPage.projects[project]).click()
+    cy.get(RepositoryPage.testPlans).click()
+
+    cy.get(TestPlanPage.createTestPlan).click()
+
+    cy.get(TestPlanPage.title).type(title)
+    cy.get(TestPlanPage.description).type(description)
+
+    cy.get(TestPlanPage.addCasesBtn).click()
+
+    cy.xpath(TestPlanPage.addCasesPage.testSuite.replace('$', suite)).click()
+    cy.xpath(TestPlanPage.addCasesPage.testCase.replace('$', testCaseName)).click()
+    cy.get(TestPlanPage.addCasesPage.doneBtn).click()
+
+    cy.get(TestPlanPage.savePlanBtn).click()
+
+    cy.xpath(TestPlanPage.testPlanOnPage.
+        replace('$', title))
         .should('be.visible')
 
 })

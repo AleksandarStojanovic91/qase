@@ -1,5 +1,5 @@
 describe('QASE', () => {
-    it('Create a test project', () => {
+   it('Create a test project', () => {
         cy.login(
             'aleksandar.stojanovic@qakursevionline.com',
             'TestPass123!');
@@ -46,5 +46,18 @@ describe('QASE', () => {
             ['{"stepAction": "step action 1","data": "data 1","expectedResult": "expected result 1"}',
                 '{"stepAction": "step action 2","data": "data 2","expectedResult": "expected result 2"}',
                 '{"stepAction": "step action 3","data": "data 3","expectedResult": "expected result 3"}'])
+    })
+
+    it('Create a test plan', () => {
+        cy.login(
+            'aleksandar.stojanovic@qakursevionline.com',
+            'TestPass123!');
+
+        cy.createTestPlan(
+            'SMOKE',
+            'Test Smoke Suite',
+            'Test Smoke Plan',
+            'Test plan description',
+            'Smoke test 1')
     })
 })

@@ -9,7 +9,8 @@ const RepositoryPage = {
     createCaseBtn: '#create-case-button',
     createCaseButton: '#create-case-button',
     testSuite: '//a[text()="$"]',
-    testCaseInSuite: '//*[text()="$"]'
+    testCaseInSuite: '//*[text()="$"]',
+    testPlans: ':nth-child(3) > .rah-static > :nth-child(1) > :nth-child(1) > .x52Gbe > .nbWgel'
 
 }
 
